@@ -42,7 +42,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.10"
     }
     packaging {
         resources {
@@ -64,16 +64,20 @@ dependencies {
     implementation(libs.androidx.material3)
 
 
-    implementation(libs.hiltNavigationCompose)
+    implementation(libs.navigationCompose)
 
     implementation(libs.coilCompose)
+
+    implementation(libs.composeIconsExtended)
+
+    implementation(libs.systemUiController)
 
     implementation(libs.dagger.hilt)
     kapt(libs.dagger.hilt.compiler)
     implementation(libs.hiltNavigationCompose)
 
     implementation(libs.retrofit)
-    implementation(libs.moshiConverter)
+    //implementation(libs.moshiConverter)
     implementation(libs.gooleGson)
     implementation(libs.gsonCoverter)
 
