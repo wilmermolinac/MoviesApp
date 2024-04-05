@@ -1,11 +1,7 @@
-package com.wamcstudios.moviesapp.home.data.local.entity
+package com.wamcstudios.moviesapp.core.domain.model
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-
-@Entity(tableName = "tb_mediaentity")
-data class MediaEntity(
-    @PrimaryKey val id: Int,
+data class Media(
+    val id: Int,
     val adult: Boolean,
     val backdropPath: String,
     val genreIds: List<Int>,
@@ -28,5 +24,4 @@ data class MediaEntity(
     val mediaCategory: String,
     val isFavorite: Boolean,
     val mediaType: String,
-
-    )
+)

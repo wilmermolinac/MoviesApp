@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">MoviesApp</string>
+    <string name="popular">popular</string>
+    <string name="upcoming">upcoming</string>
+    <string name="msg_error_load_data">Couldn\'t load data</string>
+    <string name="msg_error_load_media">Error no such media</string>
 </resources>
