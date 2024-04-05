@@ -3,11 +3,11 @@ package com.wamcstudios.moviesapp.home.data.remote.dto
 
 import com.google.gson.annotations.SerializedName
 
-data class MovieListDto(
+data class MediaListDto(
     @SerializedName("page")
     val page: Int,
     @SerializedName("results")
-    val results: List<Result>,
+    val mediaDtos: List<MediaDto>,
     @SerializedName("total_pages")
     val totalPages: Int,
     @SerializedName("total_results")
