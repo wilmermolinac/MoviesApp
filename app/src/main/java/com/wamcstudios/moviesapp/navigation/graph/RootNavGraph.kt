@@ -1,6 +1,9 @@
 package com.wamcstudios.moviesapp.navigation.graph
 
+import androidx.compose.foundation.background
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -9,9 +12,17 @@ import com.wamcstudios.moviesapp.home.presentation.home.HomeScreen
 import com.wamcstudios.moviesapp.navigation.routes.NavigationRoute
 
 @Composable
-fun RootNavGraph(navHostController: NavHostController, startNavigationRoute: NavigationRoute) {
+fun RootNavGraph(
+    modifier: Modifier = Modifier,
+    navHostController: NavHostController,
+    startNavigationRoute: NavigationRoute,
+) {
 
-    NavHost(navController = navHostController, startDestination = startNavigationRoute.route) {
+    NavHost(
+        modifier = modifier.background(color = Color.Transparent),
+        navController = navHostController,
+        startDestination = startNavigationRoute.route
+    ) {
 
         composable(route = NavigationRoute.Home.route) {
 
@@ -20,8 +31,20 @@ fun RootNavGraph(navHostController: NavHostController, startNavigationRoute: Nav
 
         }
 
-        composable(route = NavigationRoute.Detail.route){
+        composable(route = NavigationRoute.Detail.route) {
 
+
+        }
+
+        composable(route = NavigationRoute.Search.route){
+
+        }
+
+        composable(route = NavigationRoute.Favorites.route){
+
+        }
+
+        composable(route = NavigationRoute.Settings.route){
 
         }
     }

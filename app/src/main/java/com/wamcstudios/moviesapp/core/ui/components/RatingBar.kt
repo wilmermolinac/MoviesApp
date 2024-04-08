@@ -1,4 +1,4 @@
-package com.wamcstudios.moviesapp.core.presentation.components
+package com.wamcstudios.moviesapp.core.ui.components
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.icons.Icons

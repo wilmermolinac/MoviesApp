@@ -1,16 +1,19 @@
 package com.wamcstudios.moviesapp.core.domain.model
 
+import com.wamcstudios.moviesapp.home.domain.model.KnownFor
+import java.time.LocalDate
+
 data class Media(
     val id: Int,
     val adult: Boolean,
     val backdropPath: String,
-    val genreIds: List<Int>,
+    val genres: List<String>,
     val originalLanguage: String,
     val originalTitle: String,
     val overview: String,
     val popularity: Double,
     val posterPath: String,
-    val releaseDate: String,
+    val releaseDate: LocalDate,
     val title: String,
     val video: Boolean,
     val voteAverage: Double,
@@ -24,4 +27,10 @@ data class Media(
     val mediaCategory: String,
     val isFavorite: Boolean,
     val mediaType: String,
+
+    // People
+    val gender: Int,
+    val knownFor: List<KnownFor>,
+    val knownForDepartment: String,
+    val profilePath: String,
 )

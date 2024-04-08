@@ -24,6 +24,10 @@ retrofitVersion = "2.11.0"
 gooleGsonVersion = "2.10.1"
 # okHttp1
 okHttpVersion = "5.0.0-alpha.12"
+
+#kotlinSerialization
+kotlinSerializationVersion = "1.6.0"
+
 # Room
 roomVersion = "2.6.1"
 
@@ -74,6 +78,10 @@ moshiConverter = { group = "com.squareup.retrofit2", name = "converter-moshi", v
 gooleGson = { group = "com.google.code.gson", name = "gson", version.ref = "gooleGsonVersion" }
 gsonCoverter = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofitVersion" }
 
+# Kotlin Serialization
+kotlinSerialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-jso", version.ref = "kotlinSerializationVersion" }
+
+
 # okHttp
 okHttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okHttpVersion" }
 okHttpLoggingInterceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okHttpVersion" }
@@ -87,7 +95,7 @@ roomKtx = { group = "androidx.room", name = "room-ktx", version.ref = "roomVersi
 systemUiController = { group = "com.google.accompanist", name = "accompanist-systemuicontroller", version.ref = "systemUiControllerVersion" }
 
 # Extended Icons
-composeIconsExtended = { group = "androidx.compose.material", name = "material-icons-extended", version.ref = "composeIconsExtendedVersion"}
+composeIconsExtended = { group = "androidx.compose.material", name = "material-icons-extended", version.ref = "composeIconsExtendedVersion" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -96,3 +104,4 @@ androidLibrary = { id = "com.android.library", version.ref = "agp" }
 jetbrainsKotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
 hiltPlugin = { id = "com.google.dagger.hilt.android", version.ref = "hiltAndroid" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+

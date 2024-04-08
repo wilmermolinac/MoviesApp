@@ -7,8 +7,10 @@ import com.wamcstudios.moviesapp.home.data.local.MediaDatabase
 import com.wamcstudios.moviesapp.home.data.remote.ApiService
 import com.wamcstudios.moviesapp.home.data.repository.MediaRepositoryImpl
 import com.wamcstudios.moviesapp.home.domain.repository.MediaRepository
+import com.wamcstudios.moviesapp.home.domain.use_case.GetGenresList
 import com.wamcstudios.moviesapp.home.domain.use_case.GetMediaDetailById
 import com.wamcstudios.moviesapp.home.domain.use_case.GetMoviesAndTvSeriesList
+import com.wamcstudios.moviesapp.home.domain.use_case.GetTrendingList
 import com.wamcstudios.moviesapp.home.domain.use_case.HomeUseCases
 import com.wamcstudios.moviesapp.home.domain.use_case.UpdateMediaFavorite
 import dagger.Module
@@ -29,7 +31,7 @@ object HomeModule {
     @Singleton
     fun provideOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder().addInterceptor(HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BASIC
+            level = HttpLoggingInterceptor.Level.BODY
         }).build()
     }
 
@@ -54,7 +56,8 @@ object HomeModule {
         return HomeUseCases(
             getMediaDetailById = GetMediaDetailById(repository),
             getMoviesAndTvSeriesList = GetMoviesAndTvSeriesList(repository),
-            updateMediaFavorite = UpdateMediaFavorite(repository)
+            updateMediaFavorite = UpdateMediaFavorite(repository),
+            getTrendingList = GetTrendingList(repository), getGenresList = GetGenresList(repository)
         )
     }
 

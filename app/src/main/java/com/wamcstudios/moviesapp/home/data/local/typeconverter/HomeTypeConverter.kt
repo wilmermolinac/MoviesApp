@@ -4,6 +4,8 @@ import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter
 import com.google.gson.reflect.TypeToken
 import com.wamcdevs.habitsjcapp.home.data.util.JsonParser
+import com.wamcstudios.moviesapp.home.data.remote.dto.KnownForDto
+import com.wamcstudios.moviesapp.home.domain.model.KnownFor
 
 @ProvidedTypeConverter
 class HomeTypeConverter(val jsonParser: JsonParser) {
@@ -45,6 +47,20 @@ class HomeTypeConverter(val jsonParser: JsonParser) {
     fun toOriginCountry(json: String): List<String> {
         return jsonParser.fromJson<ArrayList<String>>(
             json = json, type = object : TypeToken<ArrayList<String>>() {}.type
+        ) ?: emptyList()
+    }
+
+    @TypeConverter
+    fun fromKnownFor(KnownFor: List<KnownFor>): String {
+
+        return jsonParser.toJson(KnownFor, object : TypeToken<ArrayList<KnownFor>>() {}.type)
+            ?: "[]"
+    }
+
+    @TypeConverter
+    fun toKnownFor(json: String): List<KnownFor> {
+        return jsonParser.fromJson<ArrayList<KnownFor>>(
+            json = json, type = object : TypeToken<ArrayList<Int>>() {}.type
         ) ?: emptyList()
     }
 

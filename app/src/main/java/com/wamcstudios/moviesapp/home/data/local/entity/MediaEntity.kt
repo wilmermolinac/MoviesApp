@@ -2,13 +2,14 @@ package com.wamcstudios.moviesapp.home.data.local.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.wamcstudios.moviesapp.home.domain.model.KnownFor
 
 @Entity(tableName = "tb_mediaentity")
 data class MediaEntity(
     @PrimaryKey val id: Int,
     val adult: Boolean,
     val backdropPath: String,
-    val genreIds: List<Int>,
+    val genres: List<String>,
     val originalLanguage: String,
     val originalTitle: String,
     val overview: String,
@@ -29,4 +30,9 @@ data class MediaEntity(
     val isFavorite: Boolean,
     val mediaType: String,
 
-    )
+    // People
+    val gender: Int,
+    val knownFor: List<KnownFor>,
+    val knownForDepartment: String,
+    val profilePath: String,
+)

@@ -7,6 +7,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.wamcstudios.moviesapp.navigation.routes.NavigationRoute
 import com.wamcstudios.moviesapp.navigation.graph.RootNavGraph
+import com.wamcstudios.moviesapp.ui.MoviesApp
 import com.wamcstudios.moviesapp.ui.theme.MoviesAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,7 +23,7 @@ class MainActivity : ComponentActivity() {
 
             MoviesAppTheme {
 
-                RootNavGraph(
+                MoviesApp(
                     navHostController = navHostController,
                     startNavigationRoute = NavigationRoute.Home
                 )

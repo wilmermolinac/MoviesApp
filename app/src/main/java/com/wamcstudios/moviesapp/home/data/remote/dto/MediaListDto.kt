@@ -7,7 +7,7 @@ data class MediaListDto(
     @SerializedName("page")
     val page: Int,
     @SerializedName("results")
-    val mediaDtos: List<MediaDto>,
+    val mediaListDto: List<MediaDto>,
     @SerializedName("total_pages")
     val totalPages: Int,
     @SerializedName("total_results")

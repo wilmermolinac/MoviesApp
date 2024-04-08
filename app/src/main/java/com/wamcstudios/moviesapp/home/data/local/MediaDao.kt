@@ -6,6 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import androidx.room.Upsert
+import com.wamcstudios.moviesapp.home.data.local.entity.GenreEntity
 import com.wamcstudios.moviesapp.home.data.local.entity.MediaEntity
 
 @Dao
@@ -63,5 +64,27 @@ interface MediaDao {
         isFavorite: Boolean,
     )
 
+
+    @Query(
+        """
+            SELECT * 
+            FROM tb_mediaentity 
+            WHERE mediaCategory = :category
+        """
+    )
+    suspend fun getTrendingMediaList(category: String): List<MediaEntity>
+
+    @Query("DELETE FROM tb_mediaentity WHERE mediaCategory = :category AND isFavorite = :isFavorite")
+    suspend fun deleteTrendingMedia(category: String, isFavorite: Boolean)
+
+
+    @Upsert
+    suspend fun upsertGenres(genres: List<GenreEntity>)
+
+    @Query("SELECT * FROM tb_genre")
+    suspend fun getAllGenres(): List<GenreEntity>
+
+    @Query("DELETE FROM tb_genre")
+    suspend fun deleteAllGenres()
 
 }

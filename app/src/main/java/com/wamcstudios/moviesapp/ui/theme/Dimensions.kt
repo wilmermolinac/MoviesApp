@@ -24,6 +24,9 @@ data class Dimensions(
     val iconButtonSizeSmall: Dp = 0.dp,
     val iconButtonSizeMedium: Dp = 0.dp,
     val iconButtonSizeExtra: Dp = 0.dp,
+    val upcomingMovieItemHeight: Dp = 0.dp,
+    val horizontalFeedItemPosterHeight: Dp = 0.dp,
+    val horizontalFeedItemPosterWidth: Dp = 0.dp,
 )
 
 /*val CompactDimensions = Dimensions(
@@ -100,7 +103,10 @@ val CompactDimensions = Dimensions(
     iconSize = 24.dp,
     iconButtonSizeSmall = 38.dp,
     iconButtonSizeMedium = 48.dp,
-    iconButtonSizeExtra = 58.dp
+    iconButtonSizeExtra = 58.dp,
+
+    upcomingMovieItemHeight = 154.dp,
+    horizontalFeedItemPosterHeight = 178.dp, horizontalFeedItemPosterWidth = 135.dp
 )
 
 val MediumDimensions = Dimensions(
@@ -120,7 +126,10 @@ val MediumDimensions = Dimensions(
     iconSize = 26.dp,
     iconButtonSizeSmall = 48.dp,
     iconButtonSizeMedium = 58.dp,
-    iconButtonSizeExtra = 68.dp
+    iconButtonSizeExtra = 68.dp,
+
+    upcomingMovieItemHeight = 174.dp,
+    horizontalFeedItemPosterHeight = 198.dp, horizontalFeedItemPosterWidth = 155.dp
 )
 
 val ExpandedDimensions = Dimensions(
@@ -140,7 +149,9 @@ val ExpandedDimensions = Dimensions(
     iconSize = 32.dp,
     iconButtonSizeSmall = 58.dp,
     iconButtonSizeMedium = 68.dp,
-    iconButtonSizeExtra = 78.dp
+    iconButtonSizeExtra = 78.dp,
+    upcomingMovieItemHeight = 194.dp,
+    horizontalFeedItemPosterHeight = 218.dp, horizontalFeedItemPosterWidth = 175.dp
 )
 
 
