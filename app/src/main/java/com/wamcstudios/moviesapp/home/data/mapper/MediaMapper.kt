@@ -1,15 +1,32 @@
 package com.wamcstudios.moviesapp.home.data.mapper
 
 import com.wamcstudios.moviesapp.core.domain.model.Media
-import com.wamcstudios.moviesapp.core.utils.toDateString
 import com.wamcstudios.moviesapp.core.utils.toLocalDate
 import com.wamcstudios.moviesapp.home.data.local.entity.GenreEntity
 import com.wamcstudios.moviesapp.home.data.local.entity.MediaEntity
+import com.wamcstudios.moviesapp.home.data.remote.dto.BelongsToCollectionDto
+import com.wamcstudios.moviesapp.home.data.remote.dto.CreatedByDto
 import com.wamcstudios.moviesapp.home.data.remote.dto.GenreDto
 import com.wamcstudios.moviesapp.home.data.remote.dto.KnownForDto
+import com.wamcstudios.moviesapp.home.data.remote.dto.LastEpisodeToAirDto
 import com.wamcstudios.moviesapp.home.data.remote.dto.MediaDto
+import com.wamcstudios.moviesapp.home.data.remote.dto.NetworkDto
+import com.wamcstudios.moviesapp.home.data.remote.dto.NextEpisodeToAirDto
+import com.wamcstudios.moviesapp.home.data.remote.dto.ProductionCompanyDto
+import com.wamcstudios.moviesapp.home.data.remote.dto.ProductionCountryDto
+import com.wamcstudios.moviesapp.home.data.remote.dto.SeasonDto
+import com.wamcstudios.moviesapp.home.data.remote.dto.SpokenLanguageDto
+import com.wamcstudios.moviesapp.home.domain.model.BelongsToCollection
+import com.wamcstudios.moviesapp.home.domain.model.CreatedBy
 import com.wamcstudios.moviesapp.home.domain.model.Genre
 import com.wamcstudios.moviesapp.home.domain.model.KnownFor
+import com.wamcstudios.moviesapp.home.domain.model.LastEpisodeToAir
+import com.wamcstudios.moviesapp.home.domain.model.Network
+import com.wamcstudios.moviesapp.home.domain.model.NextEpisodeToAir
+import com.wamcstudios.moviesapp.home.domain.model.ProductionCompany
+import com.wamcstudios.moviesapp.home.domain.model.ProductionCountry
+import com.wamcstudios.moviesapp.home.domain.model.Season
+import com.wamcstudios.moviesapp.home.domain.model.SpokenLanguage
 import java.time.LocalDate
 
 fun MediaEntity.toMedia(): Media {
@@ -17,7 +34,7 @@ fun MediaEntity.toMedia(): Media {
         id = id,
         adult = adult,
         backdropPath = backdropPath,
-        genres = genres,
+        genres = genresIds,
         originalLanguage = originalLanguage,
         originalTitle = originalTitle,
         overview = overview,
@@ -33,12 +50,40 @@ fun MediaEntity.toMedia(): Media {
         originCountry = originCountry,
         originalName = originalName,
         mediaCategory = this.mediaCategory,
-        isFavorite = isFavorite,
-        mediaType = this.mediaType, gender, knownFor, knownForDepartment, profilePath
+        isFavorite = isFavorite ?: false,
+        mediaType = this.mediaType,
+        gender,
+        knownFor,
+        knownForDepartment,
+        profilePath,
+        belongsToCollectionDetail,
+        budgetDetail,
+        genresListDetail,
+        homepageDetail,
+        imdbIdDetail,
+        productionCompaniesDetail,
+        productionCountriesDetail,
+        revenueDetail,
+        runtimeDetail,
+        spokenLanguageDetail,
+        statusDetail,
+        taglineDetail,
+        createdByTvDetail,
+        episodeRunTimeTvDetail,
+        inProductionTvDetail,
+        languagesTvDetail,
+        lastAirDateTvDetail,
+        lastEpisodeToAirTvDetail,
+        networksTvDetail,
+        nextEpisodeToAirTvDetail,
+        numberOfEpisodesTvDetail,
+        numberOfSeasonsTvDetail,
+        seasonsTvDetail,
+        typeTvDetail
     )
 }
 
-fun Media.toMediaEntity(): MediaEntity {
+/*fun Media.toMediaEntity(): MediaEntity {
     return MediaEntity(
         id,
         adult,
@@ -60,17 +105,43 @@ fun Media.toMediaEntity(): MediaEntity {
         originalName,
         mediaCategory,
         isFavorite,
-        mediaType, gender = gender, knownFor, knownForDepartment, profilePath
+        mediaType,
+        gender = gender,
+        knownFor,
+        knownForDepartment,
+        profilePath,
+        belongsToCollectionDetail,
+        budgetDetail,
+        genresListDetail,
+        homepageDetail,
+        imdbIdDetail,
+        productionCompaniesDetail,
+        productionCountriesDetail,
+        revenueDetail,
+        runtimeDetail,
+        spokenLanguageDetail,
+        statusDetail,
+        taglineDetail,
+        createdByTvDetail,
+        episodeRunTimeTvDetail,
+        inProductionTvDetail,
+        languagesTvDetail,
+        lastAirDateTvDetail,
+        lastEpisodeToAirTvDetail,
+        networksTvDetail,
+        nextEpisodeToAirTvDetail,
+        numberOfEpisodesTvDetail,
+        numberOfSeasonsTvDetail, seasonsTvDetail,
+        typeTvDetail
     )
-}
+}*/
 
 fun MediaDto.toMediaEntity(mediaCategory: String, mediaType: String): MediaEntity {
-    return MediaEntity(
-        id = id,
+    return MediaEntity(id = id,
         adult = adult ?: false,
         backdropPath = backdropPath ?: "",
-        genres = genreIds?.map {
-            it.toString()
+        genresIds = genreIds?.map {
+            it
         } ?: emptyList(),
         originalLanguage = originalLanguage ?: "",
         originalTitle = originalTitle ?: "",
@@ -88,19 +159,54 @@ fun MediaDto.toMediaEntity(mediaCategory: String, mediaType: String): MediaEntit
         originCountry = originCountry ?: emptyList(),
         mediaCategory = mediaCategory,
         mediaType = this.mediaType ?: mediaType,
-        isFavorite = false,
         knownFor = this.knownForListDto?.map {
             it.toKnownFor()
         } ?: emptyList(),
         gender = gender ?: 0,
         knownForDepartment = knownForDepartment ?: "",
-        profilePath = profilePath ?: ""
-    )
+        profilePath = profilePath ?: "",
+        belongsToCollectionDetail = belongsToCollectionDetailDto?.toBelongsToCollection(),
+        budgetDetail = budgetDetail ?: 0,
+        genresListDetail = genresDetail?.map {
+            it.toGenre()
+        } ?: emptyList(),
+        homepageDetail = homepageDetail ?: "",
+        productionCompaniesDetail = productionCompaniesDetail?.map {
+            it.toProductionCompany()
+        } ?: emptyList(),
+        imdbIdDetail = imdbIdDetail ?: "",
+        revenueDetail = revenueDetail ?: 0,
+        runtimeDetail = runtimeDetail ?: 0,
+        spokenLanguageDetail = spokenLanguageDtosDetail?.map {
+            it.toSpokenLanguage()
+        } ?: emptyList(),
+        productionCountriesDetail = productionCountriesDetail?.map {
+            it.toProductionCountry()
+        } ?: emptyList(),
+        statusDetail = statusDetail ?: "",
+        createdByTvDetail = createdByDtoTvDetail?.map {
+            it.toCreatedBy()
+        } ?: emptyList(),
+        taglineDetail = taglineDetail ?: "",
+        inProductionTvDetail = inProductionTvDetail ?: false,
+        languagesTvDetail = languagesTvDetail ?: emptyList(),
+        lastAirDateTvDetail = lastAirDateTvDetail ?: "",
+        lastEpisodeToAirTvDetail = lastEpisodeToAirDtoTvDetail?.toLastEpisodeToAirDto(),
+        episodeRunTimeTvDetail = episodeRunTimeTvDetail ?: emptyList(),
+        nextEpisodeToAirTvDetail = nextEpisodeToAirTvDetail?.toNextEpisodeToAir(),
+        networksTvDetail = networksTvDetail?.map {
+            it.toNetwork()
+        } ?: emptyList(),
+        numberOfSeasonsTvDetail = numberOfSeasonsTvDetail ?: 0,
+        seasonsTvDetail = seasonsTvDetail?.map {
+            it.toSeason()
+        } ?: emptyList(),
+        numberOfEpisodesTvDetail = numberOfEpisodesTvDetail ?: 0,
+        typeTvDetail = typeTvDetail ?: "")
 }
 
 fun MediaDto.toMedia(mediaCategory: String, mediaType: String): Media {
-    return Media(
-        id = id,
+    return Media(id = id,
         adult = adult ?: false,
         backdropPath = backdropPath ?: "",
         genres = genreIds?.map {
@@ -122,13 +228,50 @@ fun MediaDto.toMedia(mediaCategory: String, mediaType: String): Media {
         originCountry = originCountry ?: emptyList(),
         mediaCategory = mediaCategory,
         mediaType = this.mediaType ?: mediaType,
-        isFavorite = false, knownFor = this.knownForListDto?.map {
+        knownFor = this.knownForListDto?.map {
             it.toKnownFor()
         } ?: emptyList(),
         gender = gender ?: 0,
         knownForDepartment = knownForDepartment ?: "",
-        profilePath = profilePath ?: ""
-    )
+        profilePath = profilePath ?: "",
+        belongsToCollectionDetail = belongsToCollectionDetailDto?.toBelongsToCollection(),
+        budgetDetail = budgetDetail ?: 0,
+        genresListDetail = genresDetail?.map {
+            it.toGenre()
+        } ?: emptyList(),
+        homepageDetail = homepageDetail ?: "",
+        productionCompaniesDetail = productionCompaniesDetail?.map {
+            it.toProductionCompany()
+        } ?: emptyList(),
+        imdbIdDetail = imdbIdDetail ?: "",
+        revenueDetail = revenueDetail ?: 0,
+        runtimeDetail = runtimeDetail ?: 0,
+        spokenLanguageDetail = spokenLanguageDtosDetail?.map {
+            it.toSpokenLanguage()
+        } ?: emptyList(),
+        productionCountriesDetail = productionCountriesDetail?.map {
+            it.toProductionCountry()
+        } ?: emptyList(),
+        statusDetail = statusDetail ?: "",
+        createdByTvDetail = createdByDtoTvDetail?.map {
+            it.toCreatedBy()
+        } ?: emptyList(),
+        taglineDetail = taglineDetail ?: "",
+        inProductionTvDetail = inProductionTvDetail ?: false,
+        languagesTvDetail = languagesTvDetail ?: emptyList(),
+        lastAirDateTvDetail = lastAirDateTvDetail ?: "",
+        lastEpisodeToAirTvDetail = lastEpisodeToAirDtoTvDetail?.toLastEpisodeToAirDto(),
+        episodeRunTimeTvDetail = episodeRunTimeTvDetail ?: emptyList(),
+        nextEpisodeToAirTvDetail = nextEpisodeToAirTvDetail?.toNextEpisodeToAir(),
+        networksTvDetail = networksTvDetail?.map {
+            it.toNetwork()
+        } ?: emptyList(),
+        numberOfSeasonsTvDetail = numberOfSeasonsTvDetail ?: 0,
+        seasonsTvDetail = seasonsTvDetail?.map {
+            it.toSeason()
+        } ?: emptyList(),
+        numberOfEpisodesTvDetail = numberOfEpisodesTvDetail ?: 0,
+        typeTvDetail = typeTvDetail ?: "")
 }
 
 fun KnownForDto.toKnownFor(): KnownFor {
@@ -170,3 +313,81 @@ fun GenreEntity.toGenre(): Genre {
 fun Genre.toGenreEntity(): GenreEntity {
     return GenreEntity(id, name)
 }
+
+fun BelongsToCollectionDto.toBelongsToCollection(): BelongsToCollection {
+    return BelongsToCollection(backdropPath ?: "", id ?: 0, name ?: "", posterPath ?: "")
+}
+
+fun CreatedByDto.toCreatedBy(): CreatedBy {
+    return com.wamcstudios.moviesapp.home.domain.model.CreatedBy(
+        creditId ?: "", gender ?: 0, id ?: 0, name ?: "", profilePath ?: ""
+    )
+}
+
+fun LastEpisodeToAirDto.toLastEpisodeToAirDto(): LastEpisodeToAir {
+    return LastEpisodeToAir(
+        airDate ?: "",
+        episodeNumber ?: 0,
+        episodeType ?: "",
+        id ?: 0,
+        name ?: "",
+        overview ?: "",
+        productionCode ?: "",
+        runtime ?: 0,
+        seasonNumber ?: 0,
+        showId ?: 0,
+        stillPath ?: "",
+        voteAverage ?: 0.0,
+        voteCount ?: 0
+    )
+}
+
+fun NetworkDto.toNetwork(): Network {
+    return Network(id ?: 0, logoPath ?: "", name ?: "", originCountry ?: "")
+}
+
+fun NextEpisodeToAirDto.toNextEpisodeToAir(): NextEpisodeToAir {
+    return NextEpisodeToAir(
+        airDate ?: "",
+        episodeNumber ?: 0,
+        episodeType ?: "",
+        id ?: 0,
+        name ?: "",
+        overview ?: "",
+        productionCode ?: "",
+        runtime ?: 0,
+        seasonNumber ?: 0,
+        showId ?: 0,
+        stillPath ?: "",
+        voteAverage ?: 0.0,
+        voteCount ?: 0
+    )
+}
+
+
+fun ProductionCompanyDto.toProductionCompany(): ProductionCompany {
+    return ProductionCompany(id ?: 0, logoPath ?: "", name ?: "", originCountry ?: "")
+}
+
+fun ProductionCountryDto.toProductionCountry(): ProductionCountry {
+    return ProductionCountry(iso31661 ?: "", name ?: "")
+}
+
+fun SeasonDto.toSeason(): Season {
+    return Season(
+        airDate ?: "",
+        episodeCount ?: 0,
+        id ?: 0,
+        name ?: "",
+        overview ?: "",
+        posterPath ?: "",
+        seasonNumber ?: 0,
+        voteAverage ?: 0.0
+    )
+}
+
+fun SpokenLanguageDto.toSpokenLanguage(): SpokenLanguage {
+    return SpokenLanguage(englishName ?: "", iso6391 ?: "", name ?: "")
+}
+
+

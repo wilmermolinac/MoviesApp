@@ -20,4 +20,14 @@
     <string name="no_genre">No genre.</string>
     <string name="most_popular">Most Popular</string>
     <string name="trending_now">Trending Now</string>
+    <string name="calendar">Calendar</string>
+    <string name="time">Time</string>
+    <string name="genres">Genres</string>
+    <string name="overview">Overview</string>
+    <string name="detail_runtime_text">%1$s minutes</string>
+    <string name="no_runtime">No runtime</string>
+    <string name="icon_favorite">Icon favorite</string>
+    <string name="production">Production Company</string>
+    <string name="country">"Country: %1$s"</string>
+    <string name="no_data">No Data</string>
 </resources>

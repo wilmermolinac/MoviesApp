@@ -1,6 +1,7 @@
 package com.wamcstudios.moviesapp.home.data.remote
 
 import com.wamcstudios.moviesapp.home.data.remote.dto.GenresDto
+import com.wamcstudios.moviesapp.home.data.remote.dto.MediaDto
 import com.wamcstudios.moviesapp.home.data.remote.dto.MediaListDto
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -30,4 +31,12 @@ interface ApiService {
         @Path("type") type: String,
         @Query("api_key") apiKey: String,
     ): GenresDto
+
+    @GET("{type}/{mediaId}")
+    suspend fun getMediaDetail(
+        @Path("type") type: String,
+        @Path("mediaId") mediaId: Int,
+        @Query("api_key") apiKey: String,
+    ): MediaDto
+
 }

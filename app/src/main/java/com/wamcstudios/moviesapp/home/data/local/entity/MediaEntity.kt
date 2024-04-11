@@ -2,14 +2,24 @@ package com.wamcstudios.moviesapp.home.data.local.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.wamcstudios.moviesapp.home.domain.model.BelongsToCollection
+import com.wamcstudios.moviesapp.home.domain.model.CreatedBy
+import com.wamcstudios.moviesapp.home.domain.model.Genre
 import com.wamcstudios.moviesapp.home.domain.model.KnownFor
+import com.wamcstudios.moviesapp.home.domain.model.LastEpisodeToAir
+import com.wamcstudios.moviesapp.home.domain.model.Network
+import com.wamcstudios.moviesapp.home.domain.model.NextEpisodeToAir
+import com.wamcstudios.moviesapp.home.domain.model.ProductionCompany
+import com.wamcstudios.moviesapp.home.domain.model.ProductionCountry
+import com.wamcstudios.moviesapp.home.domain.model.Season
+import com.wamcstudios.moviesapp.home.domain.model.SpokenLanguage
 
 @Entity(tableName = "tb_mediaentity")
 data class MediaEntity(
     @PrimaryKey val id: Int,
     val adult: Boolean,
     val backdropPath: String,
-    val genres: List<String>,
+    val genresIds: List<Int>,
     val originalLanguage: String,
     val originalTitle: String,
     val overview: String,
@@ -27,7 +37,7 @@ data class MediaEntity(
     val originalName: String,
 
     val mediaCategory: String,
-    val isFavorite: Boolean,
+    val isFavorite: Boolean = false,
     val mediaType: String,
 
     // People
@@ -35,4 +45,31 @@ data class MediaEntity(
     val knownFor: List<KnownFor>,
     val knownForDepartment: String,
     val profilePath: String,
+
+    val belongsToCollectionDetail: BelongsToCollection?,
+    val budgetDetail: Int,
+    val genresListDetail: List<Genre>,
+    val homepageDetail: String,
+    val imdbIdDetail: String,
+    val productionCompaniesDetail: List<ProductionCompany>,
+    val productionCountriesDetail: List<ProductionCountry>,
+    val revenueDetail: Int,
+    val runtimeDetail: Int,
+    val spokenLanguageDetail: List<SpokenLanguage>,
+    val statusDetail: String,
+    val taglineDetail: String,
+
+
+    val createdByTvDetail: List<CreatedBy>,
+    val episodeRunTimeTvDetail: List<Int>,
+    val inProductionTvDetail: Boolean,
+    val languagesTvDetail: List<String>,
+    val lastAirDateTvDetail: String,
+    val lastEpisodeToAirTvDetail: LastEpisodeToAir?,
+    val networksTvDetail: List<Network>,
+    val nextEpisodeToAirTvDetail: NextEpisodeToAir?,
+    val numberOfEpisodesTvDetail: Int,
+    val numberOfSeasonsTvDetail: Int,
+    val seasonsTvDetail: List<Season>,
+    val typeTvDetail: String,
 )

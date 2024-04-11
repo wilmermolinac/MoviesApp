@@ -8,7 +8,17 @@ import javax.inject.Inject
 
 class GetMediaDetailById @Inject constructor(private val repository: MediaRepository) {
 
-    suspend operator fun invoke(mediaId: Int): Flow<Resource<Media>> {
-        return repository.getMediaDetailById(mediaId)
+    suspend operator fun invoke(
+        mediaId: Int,
+        fetchFromRemote: Boolean,
+        isRefresh: Boolean,
+        apiKey: String,
+    ): Flow<Resource<Media>> {
+        return repository.getMediaDetailById(
+            mediaId,
+            fetchFromRemote,
+            isRefresh,
+            apiKey,
+        )
     }
 }

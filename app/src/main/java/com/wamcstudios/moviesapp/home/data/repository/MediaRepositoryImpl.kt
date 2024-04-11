@@ -40,6 +40,7 @@ class MediaRepositoryImpl @Inject constructor(
             // Traemos la lista de objetos Genre en la base de datos y cada objeto Genre tiene un ID y un nombre
             // Primero, creamos un mapa de IDs de géneros a nombres de géneros para facilitar la búsqueda
             val genreIdToNameMap = dao.getAllGenres().associateBy({ it.id }, { it.name })
+
             val localMediaList =
                 dao.getMediaListByTypeAndCategory(mediaType = mediaType, category = mediaCategory)
 
@@ -103,23 +104,50 @@ class MediaRepositoryImpl @Inject constructor(
             }
 
             remoteMediaList.let { mediaDtos ->
-                val media = mediaDtos.map {
+                /*val media = mediaDtos.map {
                     it.toMedia(mediaCategory, mediaType)
                         .copy(genres = it.genreIds?.mapNotNull { genreId ->
                             // Luego, iteramos sobre remoteMediaList y reemplazamos cada ID de género
                             // con su nombre correspondiente
                             genreIdToNameMap[genreId]
                         } ?: emptyList())
+                }*/
+
+                /*val mediaEntity = mediaDtos.map {
+                    it.toMediaEntity(mediaCategory, mediaType).copy(genres =
+                    it.genreIds?.mapNotNull { genreId ->
+                        // Luego, iteramos sobre remoteMediaList y reemplazamos cada ID de género
+                        // con su nombre correspondiente
+                        genreIdToNameMap[genreId]
+                    } ?: emptyList())
+                }*/
+
+                val combinelist = mediaDtos.map { mediaDto ->
+
+                    // Mapeamos cada objeto 'mediaDto' a un objeto 'mediaEntityRemote'.
+                    val mediaEntityRemote = mediaDto.toMediaEntity(mediaCategory, mediaType)
+
+                    // Buscamos si el objeto 'mediaEntityRemote' ya existe en la lista local 'localMediaList'.
+                    localMediaList.find {
+                        it.id == mediaEntityRemote.id
+                    }?.let {
+                        // Si el objeto ya existe, creamos una copia del objeto pero mantenemos
+                        // el valor original de 'isFavorite' de la lista local.
+                        it.copy(isFavorite = it.isFavorite)
+                    }
+                        ?: mediaEntityRemote // Si el objeto no existe, usamos el objeto 'mediaEntityRemote'.
                 }
 
-                val entities = mediaDtos.map {
-                    it.toMediaEntity(mediaCategory, mediaType)
-                        .copy(genres = it.genreIds?.mapNotNull { genresId ->
-                            genreIdToNameMap[genresId]
-                        } ?: emptyList())
-                }
 
-                dao.upsertMediaList(entities)
+                dao.upsertMediaList(combinelist)
+
+                val media = combinelist.map {
+                    it.toMedia().copy(genres = it.genresIds.mapNotNull { genreId ->
+                        // Para cada ID de género en 'mediaDto', buscamos su nombre correspondiente
+                        // en el mapa 'genreIdToNameMap' y lo agregamos a la lista de géneros.
+                        genreIdToNameMap[genreId]
+                    } ?: emptyList())
+                }
 
                 emit(Resource.Success(media))
 
@@ -200,7 +228,7 @@ class MediaRepositoryImpl @Inject constructor(
             }
 
             remoteTrendingMediaList.let { mediaListDto ->
-                val media = mediaListDto.map {
+                /*val media = mediaListDto.map {
                     it.toMedia(mediaType = type, mediaCategory = trendingCategory)
                         .copy(genres = it.genreIds?.mapNotNull { genreId ->
                             // Luego, iteramos sobre remoteMediaList y reemplazamos cada ID de género
@@ -214,9 +242,35 @@ class MediaRepositoryImpl @Inject constructor(
                         .copy(genres = it.genreIds?.mapNotNull { genreId ->
                             genreIdToNameMap[genreId]
                         } ?: emptyList())
+                }*/
+
+                val combinelist = mediaListDto.map { mediaDto ->
+
+                    // Mapeamos cada objeto 'mediaDto' a un objeto 'mediaEntityRemote'.
+                    val mediaEntityRemote =
+                        mediaDto.toMediaEntity(mediaCategory = trendingCategory, mediaType = type)
+
+                    // Buscamos si el objeto 'mediaEntityRemote' ya existe en la lista local 'localMediaList'.
+                    localMediaList.find { localMediaEntity ->
+                        localMediaEntity.id == mediaEntityRemote.id
+                    }?.let {
+                        // Si el objeto ya existe, creamos una copia del objeto pero mantenemos
+                        // el valor original de 'isFavorite' de la lista local.
+                        it.copy(isFavorite = it.isFavorite)
+                    }
+                        ?: mediaEntityRemote // Si el objeto no existe, usamos el objeto 'mediaEntityRemote'.
                 }
 
-                dao.upsertMediaList(mediaEntities)
+
+                dao.upsertMediaList(combinelist)
+
+                val media = combinelist.map {
+                    it.toMedia().copy(genres = it.genresIds.mapNotNull { genreId ->
+                        // Para cada ID de género en 'mediaDto', buscamos su nombre correspondiente
+                        // en el mapa 'genreIdToNameMap' y lo agregamos a la lista de géneros.
+                        genreIdToNameMap[genreId]
+                    } ?: emptyList())
+                }
 
                 emit(Resource.Success(media))
 
@@ -229,28 +283,83 @@ class MediaRepositoryImpl @Inject constructor(
 
     override suspend fun getMediaDetailById(
         mediaId: Int,
+        fetchFromRemote: Boolean,
+        isRefresh: Boolean,
+        apiKey: String,
     ): Flow<Resource<Media>> {
-
         return flow {
             emit(Resource.Loading())
-            val mediaItem = dao.getMediaById(mediaId)
+            val localMediaItem = dao.getMediaById(mediaId)
 
-            if (mediaItem != null) {
+            val shouldJustLoadFromCache = !isRefresh && !fetchFromRemote
+
+            if (shouldJustLoadFromCache) {
                 emit(
                     Resource.Success(
-                        data = mediaItem.toMedia()
+                        data = localMediaItem.toMedia()
                     )
                 )
                 return@flow
             }
 
+            val remoteMediaItem = try {
+                api.getMediaDetail(
+                    type = localMediaItem.mediaType,
+                    mediaId = mediaId,
+                    apiKey = apiKey
+                )
+            } catch (e: IOException) {
+                e.printStackTrace()
+                emit(
+                    Resource.Error(message = UiText.StringResource(R.string.msg_error_load_data))
+                )
+                return@flow
+            } catch (e: HttpException) {
+                e.printStackTrace()
 
-            emit(Resource.Error(message = UiText.StringResource(R.string.msg_error_load_media)))
+                emit(
+                    Resource.Error(message = UiText.StringResource(R.string.msg_error_load_data))
+                )
+                return@flow
+            } catch (e: Exception) {
+                e.printStackTrace()
+                val message = e.message ?: "Couldn't load data"
+
+                emit(
+                    Resource.Error(message = UiText.DynamicString(message))
+                )
+                return@flow
+            }
+
+
+            remoteMediaItem.let { mediaDto ->
+
+                val mediaEntity = mediaDto.toMediaEntity(
+                    mediaCategory = localMediaItem.mediaCategory,
+                    mediaType = localMediaItem.mediaType
+                ).copy(
+                    adult = localMediaItem.adult,
+                    backdropPath = localMediaItem.backdropPath,
+                    genresIds = localMediaItem.genresIds,
+                    originalLanguage = localMediaItem.originalLanguage,
+                    originalTitle = localMediaItem.originalTitle,
+                    overview = localMediaItem.overview,
+                    popularity = localMediaItem.popularity,
+                    posterPath = localMediaItem.posterPath,
+                    releaseDate = localMediaItem.releaseDate,
+                    title = localMediaItem.title,
+                    voteAverage = localMediaItem.voteAverage,
+                    voteCount = localMediaItem.voteCount,
+                    isFavorite = localMediaItem.isFavorite
+                )
+                dao.updateMediaItem(mediaEntity)
+                emit(Resource.Success(mediaEntity.toMedia()))
+            }
 
 
         }
-
     }
+
 
     override suspend fun updateMediaFavorite(mediaId: Int, isFavorite: Boolean) {
         dao.updateMediaFavorite(mediaId, isFavorite)

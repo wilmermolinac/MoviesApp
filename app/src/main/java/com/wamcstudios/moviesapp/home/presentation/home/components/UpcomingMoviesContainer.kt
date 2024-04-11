@@ -94,7 +94,7 @@ fun UpcomingMoviesContainer(
 
 
             if (mediaMovieList.isEmpty()){
-                UpcomingMovieItemShimmer()
+                UpcomingMovieItemShimmer(modifier = Modifier.pagerTransition(pagerState, page))
             }else{
 
                 val item = mediaMovieList[page]

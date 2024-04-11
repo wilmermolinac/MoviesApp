@@ -1,6 +1,6 @@
 package com.wamcstudios.moviesapp.home.presentation.home
 
-import android.util.Log
+import android.content.Context
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -13,19 +13,24 @@ import com.wamcstudios.moviesapp.core.common.CategoryTvSeries
 import com.wamcstudios.moviesapp.core.common.Constants
 import com.wamcstudios.moviesapp.core.common.MediaType
 import com.wamcstudios.moviesapp.core.utils.Resource
+import com.wamcstudios.moviesapp.core.utils.isOnline
 import com.wamcstudios.moviesapp.home.domain.use_case.HomeUseCases
+import com.wamcstudios.moviesapp.navigation.routes.NavigationRoute
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import java.time.LocalDateTime
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(private val homeUseCases: HomeUseCases) : ViewModel() {
+class HomeViewModel @Inject constructor(
+    private val homeUseCases: HomeUseCases,
+    @ApplicationContext private val context: Context,
+) : ViewModel() {
 
     var state by mutableStateOf(HomeState())
         private set
@@ -34,7 +39,13 @@ class HomeViewModel @Inject constructor(private val homeUseCases: HomeUseCases) 
     val uiEvent = _uiEvent.receiveAsFlow()
 
     init {
+        validateNetworkConnect()
         load()
+    }
+
+    private fun validateNetworkConnect() {
+        state = state.copy(isConnected = isOnline(context))
+
     }
 
 
@@ -44,10 +55,16 @@ class HomeViewModel @Inject constructor(private val homeUseCases: HomeUseCases) 
                 state = state.copy(isRefresh = !state.isRefresh)
                 onRefresh()
             }
+
+            is HomeEvent.OnMediaClick -> {
+                viewModelScope.launch {
+                    _uiEvent.send(UiEvent.Navigate(route = NavigationRoute.Detail.passData(event.mediaId)))
+                }
+            }
         }
     }
 
-    private fun onRefresh(fetchFromRemote: Boolean = true) {
+    private fun onRefresh(fetchFromRemote: Boolean = state.isConnected) {
         viewModelScope.launch {
             getGenresList()
             delay(3000)
@@ -274,7 +291,7 @@ class HomeViewModel @Inject constructor(private val homeUseCases: HomeUseCases) 
         }
     }
 
-    private fun load(fetchFromRemote: Boolean = false) {
+    private fun load(fetchFromRemote: Boolean = state.isConnected) {
 
         viewModelScope.launch {
             getGenresList()

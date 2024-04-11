@@ -1,7 +1,7 @@
 package com.wamcstudios.moviesapp.home.domain.repository
 
-import com.wamcstudios.moviesapp.core.utils.Resource
 import com.wamcstudios.moviesapp.core.domain.model.Media
+import com.wamcstudios.moviesapp.core.utils.Resource
 import com.wamcstudios.moviesapp.home.domain.model.Genre
 import kotlinx.coroutines.flow.Flow
 
@@ -28,6 +28,9 @@ interface MediaRepository {
 
     suspend fun getMediaDetailById(
         mediaId: Int,
+        fetchFromRemote: Boolean,
+        isRefresh: Boolean,
+        apiKey: String,
     ): Flow<Resource<Media>>
 
     suspend fun updateMediaFavorite(mediaId: Int, isFavorite: Boolean)

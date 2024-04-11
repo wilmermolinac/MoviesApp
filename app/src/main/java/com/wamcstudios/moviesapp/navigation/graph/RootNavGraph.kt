@@ -5,9 +5,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.wamcstudios.aifusion.navigation.utils.navigate
+import com.wamcstudios.moviesapp.home.presentation.detail.DetailScreen
 import com.wamcstudios.moviesapp.home.presentation.home.HomeScreen
 import com.wamcstudios.moviesapp.navigation.routes.NavigationRoute
 
@@ -31,20 +34,29 @@ fun RootNavGraph(
 
         }
 
-        composable(route = NavigationRoute.Detail.route) {
+        composable(
+            route = NavigationRoute.Detail.route,
+            arguments = listOf(navArgument(name = "mediaId") {
+                type = NavType.IntType
+                nullable = false
+                defaultValue = 0
 
+            })
+        ) {
+            val mediaId = it.arguments?.getInt("mediaId")
+            DetailScreen(onNavigate = navHostController::navigate)
 
         }
 
-        composable(route = NavigationRoute.Search.route){
+        composable(route = NavigationRoute.Search.route) {
 
         }
 
-        composable(route = NavigationRoute.Favorites.route){
+        composable(route = NavigationRoute.Favorites.route) {
 
         }
 
-        composable(route = NavigationRoute.Settings.route){
+        composable(route = NavigationRoute.Settings.route) {
 
         }
     }

@@ -56,4 +56,60 @@ data class MediaDto(
     @SerializedName("profile_path")
     val profilePath: String?,
 
+
+
+    // Detail
+    @SerializedName("belongs_to_collection")
+    val belongsToCollectionDetailDto: BelongsToCollectionDto?,
+    @SerializedName("budget")
+    val budgetDetail: Int?,
+    @SerializedName("genres")
+    val genresDetail: List<GenreDto>?,
+    @SerializedName("homepage")
+    val homepageDetail: String?,
+    @SerializedName("imdb_id")
+    val imdbIdDetail: String?,
+    @SerializedName("production_companies")
+    val productionCompaniesDetail: List<ProductionCompanyDto>?,
+    @SerializedName("production_countries")
+    val productionCountriesDetail: List<ProductionCountryDto>?,
+    @SerializedName("revenue")
+    val revenueDetail: Int?,
+    @SerializedName("runtime")
+    val runtimeDetail: Int?,
+    @SerializedName("spoken_languages")
+    val spokenLanguageDtosDetail: List<SpokenLanguageDto>?,
+    @SerializedName("status")
+    val statusDetail: String?,
+    @SerializedName("tagline")
+    val taglineDetail: String?,
+
+
+
+    @SerializedName("created_by")
+    val createdByDtoTvDetail: List<CreatedByDto>?,
+    @SerializedName("episode_run_time")
+    val episodeRunTimeTvDetail: List<Int>?,
+    @SerializedName("in_production")
+    val inProductionTvDetail: Boolean?,
+    @SerializedName("languages")
+    val languagesTvDetail: List<String>?,
+    @SerializedName("last_air_date")
+    val lastAirDateTvDetail: String?,
+    @SerializedName("last_episode_to_air")
+    val lastEpisodeToAirDtoTvDetail: LastEpisodeToAirDto?,
+    @SerializedName("networks")
+    val networksTvDetail: List<NetworkDto>?,
+    @SerializedName("next_episode_to_air")
+    val nextEpisodeToAirTvDetail: NextEpisodeToAirDto?,
+    @SerializedName("number_of_episodes")
+    val numberOfEpisodesTvDetail: Int?,
+    @SerializedName("number_of_seasons")
+    val numberOfSeasonsTvDetail: Int?,
+    @SerializedName("seasons")
+    val seasonsTvDetail: List<SeasonDto>?,
+    @SerializedName("type")
+    val typeTvDetail: String?,
+
+
     )
