@@ -50,7 +50,14 @@ class SeeAllViewModel @Inject constructor(
             is SeeAllEvent.OnClickMediaItem -> {
 
                 viewModelScope.launch {
-                    _uiEvent.send(UiEvent.Navigate(route = NavigationRoute.Detail.passData(event.mediaId)))
+                    _uiEvent.send(
+                        UiEvent.Navigate(
+                            route = NavigationRoute.Detail.passData(
+                                event.mediaId,
+                                event.mediaType
+                            )
+                        )
+                    )
                 }
             }
 

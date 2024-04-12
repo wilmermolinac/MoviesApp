@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.wamcstudios.calorytracker.navigation.utils.UiEvent
 import com.wamcstudios.moviesapp.core.common.Constants
+import com.wamcstudios.moviesapp.core.common.MediaType
 import com.wamcstudios.moviesapp.core.utils.Resource
 import com.wamcstudios.moviesapp.core.utils.isOnline
 import com.wamcstudios.moviesapp.home.domain.use_case.HomeUseCases
@@ -21,7 +22,9 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 private const val TAG = "DetailViewModel"
+
 @HiltViewModel
 class DetailViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
@@ -66,11 +69,19 @@ class DetailViewModel @Inject constructor(
             Log.d(TAG, "MediaId: $state")
             if (data > 0) {
                 state = state.copy(mediaId = data)
-                getMediaDetail(fetchFromRemote = state.isConnected)
             } else {
                 viewModelScope.launch {
                     _uiEvent.send(UiEvent.NavigateUp)
                 }
+            }
+        }
+
+        savedStateHandle.get<String>("mediaType")?.let { data ->
+            state = state.copy(mediaType = data)
+            getMediaDetail(fetchFromRemote = state.isConnected)
+        } ?: run {
+            viewModelScope.launch {
+                _uiEvent.send(UiEvent.NavigateUp)
             }
         }
     }
@@ -81,7 +92,9 @@ class DetailViewModel @Inject constructor(
             homeUseCases.getMediaDetailById(
                 mediaId = state.mediaId,
                 fetchFromRemote = fetchFromRemote,
-                isRefresh = state.isRefresh, apiKey = Constants.API_KEY
+                isRefresh = state.isRefresh,
+                apiKey = Constants.API_KEY,
+                mediaType = state.mediaType ?: MediaType.Movie.name
             ).onEach { resource ->
                 when (resource) {
                     is Resource.Error -> {

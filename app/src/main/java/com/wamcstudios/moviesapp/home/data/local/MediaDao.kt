@@ -67,6 +67,18 @@ interface MediaDao {
 
     @Query(
         """
+        DELETE FROM tb_mediaentity 
+        WHERE isFavorite = :isFavorite
+    """
+    )
+    suspend fun deleteMediaIsNoFavorite(
+        isFavorite: Boolean,
+    )
+
+
+
+    @Query(
+        """
             SELECT * 
             FROM tb_mediaentity 
             WHERE mediaCategory = :category
@@ -86,5 +98,11 @@ interface MediaDao {
 
     @Query("DELETE FROM tb_genre")
     suspend fun deleteAllGenres()
+
+    @Query("""SELECT * FROM tb_mediaentity 
+        WHERE LOWER(originalTitle) LIKE LOWER(:query)
+        OR Lower(overview) LIKE LOWER(:query) 
+        OR LOWER(name) LIKE LOWER(:query)""")
+    suspend fun getSearchList(query: String): List<MediaEntity>
 
 }

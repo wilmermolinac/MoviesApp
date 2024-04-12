@@ -58,7 +58,14 @@ class HomeViewModel @Inject constructor(
 
             is HomeEvent.OnMediaClick -> {
                 viewModelScope.launch {
-                    _uiEvent.send(UiEvent.Navigate(route = NavigationRoute.Detail.passData(event.mediaId)))
+                    _uiEvent.send(
+                        UiEvent.Navigate(
+                            route = NavigationRoute.Detail.passData(
+                                mediaId = event.mediaId,
+                                mediaType = event.mediaType
+                            )
+                        )
+                    )
                 }
             }
 

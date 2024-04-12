@@ -10,10 +10,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.wamcstudios.aifusion.navigation.utils.navigate
+import com.wamcstudios.moviesapp.core.common.MediaType
 import com.wamcstudios.moviesapp.home.presentation.detail.DetailScreen
 import com.wamcstudios.moviesapp.home.presentation.home.HomeScreen
 import com.wamcstudios.moviesapp.home.presentation.see_all.SeeAllScreen
 import com.wamcstudios.moviesapp.navigation.routes.NavigationRoute
+import com.wamcstudios.moviesapp.search.presentation.SearchScreen
 
 @Composable
 fun RootNavGraph(
@@ -42,9 +44,14 @@ fun RootNavGraph(
                 nullable = false
                 defaultValue = 0
 
+            }, navArgument(name = "mediaType"){
+                type = NavType.StringType
+                nullable = false
+                defaultValue = MediaType.Movie.name
             })
         ) {
             val mediaId = it.arguments?.getInt("mediaId")
+            val mediaType = it.arguments?.getInt("mediaType")
             DetailScreen(onNavigate = navHostController::navigate)
 
         }
@@ -63,6 +70,8 @@ fun RootNavGraph(
         }
 
         composable(route = NavigationRoute.Search.route) {
+
+            SearchScreen(onNavigate = navHostController::navigate)
 
         }
 

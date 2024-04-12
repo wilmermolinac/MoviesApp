@@ -84,9 +84,18 @@ fun SeeAllContent(
             } else {
                 items(state.mediaList.size) { index ->
 
+                    val item = state.mediaList[index]
+
                     MediaItem(
-                        item = state.mediaList[index],
-                        onMediaClick = { onEvent(SeeAllEvent.OnClickMediaItem(state.mediaList[index].id)) })
+                        item = item,
+                        onMediaClick = {
+                            onEvent(
+                                SeeAllEvent.OnClickMediaItem(
+                                    item.id,
+                                    item.mediaType
+                                )
+                            )
+                        })
 
                     if (index >= state.mediaList.size - 1 && !state.isLoading) {
                         onEvent(SeeAllEvent.OnPaginate)

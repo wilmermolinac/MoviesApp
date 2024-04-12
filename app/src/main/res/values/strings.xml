@@ -30,4 +30,5 @@
     <string name="production">Production Company</string>
     <string name="country">"Country: %1$s"</string>
     <string name="no_data">No Data</string>
+    <string name="clear">Clear</string>
 </resources>

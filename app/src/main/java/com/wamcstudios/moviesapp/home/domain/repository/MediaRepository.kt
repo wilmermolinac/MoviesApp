@@ -27,7 +27,7 @@ interface MediaRepository {
     ): Flow<Resource<List<Media>>>
 
     suspend fun getMediaDetailById(
-        mediaId: Int,
+        mediaId: Int, mediaType: String,
         fetchFromRemote: Boolean,
         isRefresh: Boolean,
         apiKey: String,

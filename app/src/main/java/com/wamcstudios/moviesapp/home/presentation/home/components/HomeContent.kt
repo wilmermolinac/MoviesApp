@@ -56,7 +56,7 @@ fun HomeContent(modifier: Modifier = Modifier, state: HomeState, onEvent: (HomeE
                 UpcomingMoviesContainer(
                     mediaMovieList = state.upcomingMovies,
                     onSeeClick = { onEvent(HomeEvent.OnClickSeeAll(CategoryMovies.Upcoming.name)) },
-                    onMovieClick = { onEvent(HomeEvent.OnMediaClick(it.id)) })
+                    onMovieClick = { onEvent(HomeEvent.OnMediaClick(mediaId = it.id, mediaType = it.mediaType)) })
 
             }
 
@@ -68,7 +68,7 @@ fun HomeContent(modifier: Modifier = Modifier, state: HomeState, onEvent: (HomeE
                     onSeeClick = {
                         onEvent(HomeEvent.OnClickSeeAll(CategoryTrending.Trending.name))
                     },
-                    onMediaClick = { onEvent(HomeEvent.OnMediaClick(it.id)) })
+                    onMediaClick = { onEvent(HomeEvent.OnMediaClick(it.id, it.mediaType)) })
 
 
             }
@@ -80,7 +80,7 @@ fun HomeContent(modifier: Modifier = Modifier, state: HomeState, onEvent: (HomeE
                     mediaMoviesPopular = state.popularMovies,
                     mediaTvSeriesPopular = state.popularTvSeries,
                     onSeeAllClick = { onEvent(HomeEvent.OnClickSeeAll(CategoryMovies.Popular.name)) },
-                    onMediaClick = { onEvent(HomeEvent.OnMediaClick(it.id)) })
+                    onMediaClick = { onEvent(HomeEvent.OnMediaClick(it.id, it.mediaType)) })
 
             }
             item {
@@ -89,7 +89,7 @@ fun HomeContent(modifier: Modifier = Modifier, state: HomeState, onEvent: (HomeE
                     mediaMoviesTopRated = state.topRateMovies,
                     mediaTvSeriesTopRated = state.topRateTvSeries,
                     onSeeAllClick = { onEvent(HomeEvent.OnClickSeeAll(CategoryMovies.TopRated.name)) },
-                    onMediaClick = { onEvent(HomeEvent.OnMediaClick(it.id)) })
+                    onMediaClick = { onEvent(HomeEvent.OnMediaClick(it.id, it.mediaType)) })
 
             }
 

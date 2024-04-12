@@ -3,7 +3,7 @@ package com.wamcstudios.moviesapp.home.presentation.see_all
 sealed class SeeAllEvent {
 
     object OnRefresh : SeeAllEvent()
-    data class OnClickMediaItem(val mediaId: Int) : SeeAllEvent()
+    data class OnClickMediaItem(val mediaId: Int, val mediaType: String) : SeeAllEvent()
 
     object OnPaginate : SeeAllEvent()
 

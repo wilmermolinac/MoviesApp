@@ -4,6 +4,7 @@ import com.wamcstudios.moviesapp.core.domain.model.Media
 
 data class DetailState(
     val mediaItem: Media? = null,
+    val mediaType: String? = null,
     val isLoading: Boolean = false,
     val isRefresh: Boolean = false,
     val mediaId: Int = 0,
