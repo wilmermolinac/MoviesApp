@@ -15,6 +15,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import com.wamcstudios.aifusion.core.desingsystem.theme.LocalSpacing
+import com.wamcstudios.moviesapp.core.common.CategoryMovies
+import com.wamcstudios.moviesapp.core.common.CategoryTrending
 import com.wamcstudios.moviesapp.home.presentation.home.HomeEvent
 import com.wamcstudios.moviesapp.home.presentation.home.HomeState
 import kotlinx.coroutines.delay
@@ -53,8 +55,8 @@ fun HomeContent(modifier: Modifier = Modifier, state: HomeState, onEvent: (HomeE
 
                 UpcomingMoviesContainer(
                     mediaMovieList = state.upcomingMovies,
-                    onSeeClick = { },
-                    onMovieClick = {onEvent(HomeEvent.OnMediaClick(it.id))})
+                    onSeeClick = { onEvent(HomeEvent.OnClickSeeAll(CategoryMovies.Upcoming.name)) },
+                    onMovieClick = { onEvent(HomeEvent.OnMediaClick(it.id)) })
 
             }
 
@@ -63,8 +65,10 @@ fun HomeContent(modifier: Modifier = Modifier, state: HomeState, onEvent: (HomeE
 
                 TrendingContainer(
                     trendingList = state.trendingList,
-                    onSeeClick = { },
-                    onMediaClick = {onEvent(HomeEvent.OnMediaClick(it.id))})
+                    onSeeClick = {
+                        onEvent(HomeEvent.OnClickSeeAll(CategoryTrending.Trending.name))
+                    },
+                    onMediaClick = { onEvent(HomeEvent.OnMediaClick(it.id)) })
 
 
             }
@@ -75,7 +79,8 @@ fun HomeContent(modifier: Modifier = Modifier, state: HomeState, onEvent: (HomeE
                 MostPopularContainer(
                     mediaMoviesPopular = state.popularMovies,
                     mediaTvSeriesPopular = state.popularTvSeries,
-                    onSeeAllClick = { }, onMediaClick = {onEvent(HomeEvent.OnMediaClick(it.id))})
+                    onSeeAllClick = { onEvent(HomeEvent.OnClickSeeAll(CategoryMovies.Popular.name)) },
+                    onMediaClick = { onEvent(HomeEvent.OnMediaClick(it.id)) })
 
             }
             item {
@@ -83,7 +88,8 @@ fun HomeContent(modifier: Modifier = Modifier, state: HomeState, onEvent: (HomeE
                 TopRatedContainer(
                     mediaMoviesTopRated = state.topRateMovies,
                     mediaTvSeriesTopRated = state.topRateTvSeries,
-                    onSeeAllClick = { }, onMediaClick = { onEvent(HomeEvent.OnMediaClick(it.id))})
+                    onSeeAllClick = { onEvent(HomeEvent.OnClickSeeAll(CategoryMovies.TopRated.name)) },
+                    onMediaClick = { onEvent(HomeEvent.OnMediaClick(it.id)) })
 
             }
 

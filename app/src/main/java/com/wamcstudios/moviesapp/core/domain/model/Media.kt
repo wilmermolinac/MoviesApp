@@ -52,7 +52,7 @@ data class Media(
     val imdbIdDetail: String,
     val productionCompaniesDetail: List<ProductionCompany>,
     val productionCountriesDetail: List<ProductionCountry>,
-    val revenueDetail: Int,
+    val revenueDetail: Long,
     val runtimeDetail: Int,
     val spokenLanguageDetail: List<SpokenLanguage>,
     val statusDetail: String,

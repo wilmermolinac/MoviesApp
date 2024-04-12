@@ -1,6 +1,7 @@
 package com.wamcstudios.moviesapp.home.presentation.detail
 
 import android.content.Context
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -20,7 +21,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
+private const val TAG = "DetailViewModel"
 @HiltViewModel
 class DetailViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
@@ -62,6 +63,7 @@ class DetailViewModel @Inject constructor(
 
     private fun getNavigateData() {
         savedStateHandle.get<Int>("mediaId")?.let { data ->
+            Log.d(TAG, "MediaId: $state")
             if (data > 0) {
                 state = state.copy(mediaId = data)
                 getMediaDetail(fetchFromRemote = state.isConnected)

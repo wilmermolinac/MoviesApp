@@ -9,6 +9,10 @@ sealed class NavigationRoute(val route: String) {
 
     }
 
+    object SeeAll : NavigationRoute(route = "home/see_all/?{category}") {
+        fun passData(category: String) = "home/see_all/?${category}"
+    }
+
     object Search : NavigationRoute(route = "search")
     object Favorites : NavigationRoute(route = "favorites")
     object Settings : NavigationRoute("settings")

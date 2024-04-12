@@ -74,7 +74,7 @@ data class MediaDto(
     @SerializedName("production_countries")
     val productionCountriesDetail: List<ProductionCountryDto>?,
     @SerializedName("revenue")
-    val revenueDetail: Int?,
+    val revenueDetail: Long?,
     @SerializedName("runtime")
     val runtimeDetail: Int?,
     @SerializedName("spoken_languages")
