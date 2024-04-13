@@ -14,6 +14,6 @@ sealed class NavigationRoute(val route: String) {
     }
 
     object Search : NavigationRoute(route = "search")
-    object Favorites : NavigationRoute(route = "favorites")
+    object Favorite : NavigationRoute(route = "favorite")
     object Settings : NavigationRoute("settings")
 }

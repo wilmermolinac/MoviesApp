@@ -51,7 +51,7 @@ class MediaRepositoryImpl @Inject constructor(
             if (shouldJustLoadFromCache) {
                 emit(Resource.Success(localMediaList.map {
                     it.toMedia().copy(genres = it.genresIds.mapNotNull { genreId ->
-                        // Luego, iteramos sobre remoteMediaList y reemplazamos cada ID de género
+                        // Luego, iteramos sobre localMediaList y reemplazamos cada ID de género
                         // con su nombre correspondiente
                         genreIdToNameMap[genreId]
                     } ?: emptyList())

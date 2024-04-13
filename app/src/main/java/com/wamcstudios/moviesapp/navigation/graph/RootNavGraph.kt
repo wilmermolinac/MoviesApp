@@ -11,6 +11,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.wamcstudios.aifusion.navigation.utils.navigate
 import com.wamcstudios.moviesapp.core.common.MediaType
+import com.wamcstudios.moviesapp.favorite.presentation.FavoriteScreen
 import com.wamcstudios.moviesapp.home.presentation.detail.DetailScreen
 import com.wamcstudios.moviesapp.home.presentation.home.HomeScreen
 import com.wamcstudios.moviesapp.home.presentation.see_all.SeeAllScreen
@@ -44,7 +45,7 @@ fun RootNavGraph(
                 nullable = false
                 defaultValue = 0
 
-            }, navArgument(name = "mediaType"){
+            }, navArgument(name = "mediaType") {
                 type = NavType.StringType
                 nullable = false
                 defaultValue = MediaType.Movie.name
@@ -75,7 +76,8 @@ fun RootNavGraph(
 
         }
 
-        composable(route = NavigationRoute.Favorites.route) {
+        composable(route = NavigationRoute.Favorite.route) {
+            FavoriteScreen(onNavigate = navHostController::navigate)
 
         }
 
