@@ -37,6 +37,9 @@ systemUiControllerVersion = "0.34.0"
 # Extended Icons
 composeIconsExtendedVersion = "1.6.4"
 
+# SplashScreen
+splashscreenVersion = "1.0.1"
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 
@@ -96,6 +99,10 @@ systemUiController = { group = "com.google.accompanist", name = "accompanist-sys
 
 # Extended Icons
 composeIconsExtended = { group = "androidx.compose.material", name = "material-icons-extended", version.ref = "composeIconsExtendedVersion" }
+
+
+# SplashScreen
+splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashscreenVersion" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

@@ -17,6 +17,7 @@ import com.wamcstudios.moviesapp.home.presentation.home.HomeScreen
 import com.wamcstudios.moviesapp.home.presentation.see_all.SeeAllScreen
 import com.wamcstudios.moviesapp.navigation.routes.NavigationRoute
 import com.wamcstudios.moviesapp.search.presentation.SearchScreen
+import com.wamcstudios.moviesapp.settings.presentation.SettingScreen
 
 @Composable
 fun RootNavGraph(
@@ -82,7 +83,7 @@ fun RootNavGraph(
         }
 
         composable(route = NavigationRoute.Settings.route) {
-
+            SettingScreen(onNavigate = navHostController::navigate)
         }
     }
 

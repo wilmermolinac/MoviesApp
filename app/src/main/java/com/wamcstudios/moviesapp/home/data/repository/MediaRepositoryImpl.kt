@@ -60,7 +60,7 @@ class MediaRepositoryImpl @Inject constructor(
             }
 
             var searchPage = page
-            if (isRefresh) {
+            if (isRefresh && fetchFromRemote) {
                 dao.deleteMediaByTypeAndCategory(mediaType, mediaCategory, isFavorite = false)
                 searchPage = 1
             }
@@ -188,7 +188,7 @@ class MediaRepositoryImpl @Inject constructor(
             }
 
             var searchPage = page
-            if (isRefresh) {
+            if (isRefresh && fetchFromRemote) {
                 dao.deleteTrendingMedia(category = trendingCategory, isFavorite = false)
                 searchPage = 1
             }
@@ -230,7 +230,7 @@ class MediaRepositoryImpl @Inject constructor(
             }
 
             remoteTrendingMediaList.let { mediaListDto ->
-                /*val media = mediaListDto.map {
+                val media = mediaListDto.map {
                     it.toMedia(mediaType = type, mediaCategory = trendingCategory)
                         .copy(genres = it.genreIds?.mapNotNull { genreId ->
                             // Luego, iteramos sobre remoteMediaList y reemplazamos cada ID de género
@@ -240,13 +240,13 @@ class MediaRepositoryImpl @Inject constructor(
                 }
 
                 val mediaEntities = mediaListDto.map {
-                    it.toMediaEntity(mediaCategory = trendingCategory, mediaType = type)
-                        .copy(genres = it.genreIds?.mapNotNull { genreId ->
-                            genreIdToNameMap[genreId]
-                        } ?: emptyList())
-                }*/
+                    it.toMediaEntity(
+                        mediaCategory = trendingCategory,
+                        mediaType = it.mediaType ?: type
+                    )
+                }
 
-                val combinelist = mediaListDto.map { mediaDto ->
+                /*val combinelist = mediaListDto.map { mediaDto ->
 
                     // Mapeamos cada objeto 'mediaDto' a un objeto 'mediaEntityRemote'.
                     val mediaEntityRemote =
@@ -258,21 +258,23 @@ class MediaRepositoryImpl @Inject constructor(
                     }?.let {
                         // Si el objeto ya existe, creamos una copia del objeto pero mantenemos
                         // el valor original de 'isFavorite' de la lista local.
-                        it.copy(isFavorite = it.isFavorite)
+                        it.copy(isFavorite = it.isFavorite, mediaCategory = it.mediaCategory)
                     }
                         ?: mediaEntityRemote // Si el objeto no existe, usamos el objeto 'mediaEntityRemote'.
-                }
+                }*/
 
-
-                dao.upsertMediaList(combinelist)
-
-                val media = combinelist.map {
+                /*val media = combinelist.map {
                     it.toMedia().copy(genres = it.genresIds.mapNotNull { genreId ->
                         // Para cada ID de género en 'mediaDto', buscamos su nombre correspondiente
                         // en el mapa 'genreIdToNameMap' y lo agregamos a la lista de géneros.
                         genreIdToNameMap[genreId]
                     } ?: emptyList())
-                }
+                }*/
+
+
+                dao.insertMediaList(mediaEntities)
+
+
 
                 emit(Resource.Success(media))
 
@@ -373,7 +375,6 @@ class MediaRepositoryImpl @Inject constructor(
 
                     emit(Resource.Success(remoteMediaEntity.toMedia()))
                 }
-
 
 
             }

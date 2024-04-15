@@ -89,6 +89,7 @@ dependencies {
     implementation(libs.roomKtx)
     kapt(libs.roomCompiler)
 
+    implementation(libs.splashscreen)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

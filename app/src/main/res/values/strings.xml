@@ -32,4 +32,11 @@
     <string name="no_data">No Data</string>
     <string name="clear">Clear</string>
     <string name="msg_empty_data_favorite">Currently, you have no items in your favorites list. Please add some to personalize your experience.</string>
+    <string name="about">About</string>
+    <string name="icon_github">github icon</string>
+    <string name="source_code_github">Source code on GitHub</string>
+    <string name="icon_privacy">Privacy Icon</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="icon_info">Info Icon</string>
+    <string name="version">Version</string>
 </resources>

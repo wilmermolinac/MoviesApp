@@ -81,7 +81,7 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             getGenresList()
             delay(3000)
-            getTrendingList(fetchFromRemote)
+
             getUpcomingMovies(fetchFromRemote)
 
             getTopRatedMovies(fetchFromRemote)
@@ -89,6 +89,8 @@ class HomeViewModel @Inject constructor(
 
             getMostPopularMovies(fetchFromRemote)
             getMostPopularTvSeries(fetchFromRemote)
+
+            getTrendingList(fetchFromRemote)
         }
 
     }
@@ -309,7 +311,7 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             getGenresList()
             delay(3000)
-            getTrendingList(fetchFromRemote)
+
             getUpcomingMovies(fetchFromRemote)
 
             getTopRatedMovies(fetchFromRemote)
@@ -317,6 +319,8 @@ class HomeViewModel @Inject constructor(
 
             getMostPopularMovies(fetchFromRemote)
             getMostPopularTvSeries(fetchFromRemote)
+
+            getTrendingList(fetchFromRemote)
         }
 
 
