@@ -21,10 +21,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.wamcstudios.aifusion.core.desingsystem.theme.LocalSpacing
 import com.wamcstudios.calorytracker.navigation.utils.UiEvent
 import com.wamcstudios.moviesapp.core.common.MediaType
 import com.wamcstudios.moviesapp.home.presentation.detail.components.DetailContent
+import com.wamcstudios.moviesapp.ui.theme.LocalSpacing
 import kotlinx.coroutines.flow.collectLatest
 
 

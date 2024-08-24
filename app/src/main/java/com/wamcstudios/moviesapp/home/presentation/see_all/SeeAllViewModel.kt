@@ -62,6 +62,8 @@ class SeeAllViewModel @Inject constructor(
             }
 
             SeeAllEvent.OnRefresh -> {
+                validateNetworkConnect()
+
                 state = state.copy(isRefresh = !state.isRefresh, page = 1)
 
                 when (state.category) {

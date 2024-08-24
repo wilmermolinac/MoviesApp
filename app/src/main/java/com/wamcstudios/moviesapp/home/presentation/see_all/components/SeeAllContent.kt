@@ -19,15 +19,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.font.FontWeight
-import com.wamcstudios.aifusion.core.desingsystem.theme.LocalSpacing
-import com.wamcstudios.aifusion.core.desingsystem.theme.WindowInfo
-import com.wamcstudios.aifusion.core.desingsystem.theme.rememberWindowInfo
 import com.wamcstudios.moviesapp.core.common.CategoryMovies
 import com.wamcstudios.moviesapp.core.common.CategoryTrending
 import com.wamcstudios.moviesapp.core.ui.components.MediaItemShimmer
 import com.wamcstudios.moviesapp.home.presentation.home.components.MediaItem
 import com.wamcstudios.moviesapp.home.presentation.see_all.SeeAllEvent
 import com.wamcstudios.moviesapp.home.presentation.see_all.SeeAllState
+import com.wamcstudios.moviesapp.ui.theme.LocalSpacing
+import com.wamcstudios.moviesapp.ui.theme.WindowInfo
+import com.wamcstudios.moviesapp.ui.theme.rememberWindowInfo
 import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -145,10 +145,12 @@ fun SeeAllContent(
         }
 
 
-        PullToRefreshContainer(
-            modifier = Modifier.align(Alignment.TopCenter),
-            state = pullToRefreshState, contentColor = MaterialTheme.colorScheme.primary
-        )
+
+            PullToRefreshContainer(
+                modifier = Modifier.align(Alignment.TopCenter),
+                state = pullToRefreshState, contentColor = MaterialTheme.colorScheme.primary
+            )
+
 
     }
 }

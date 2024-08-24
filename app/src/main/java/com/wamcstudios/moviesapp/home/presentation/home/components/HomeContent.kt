@@ -14,11 +14,11 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import com.wamcstudios.aifusion.core.desingsystem.theme.LocalSpacing
 import com.wamcstudios.moviesapp.core.common.CategoryMovies
 import com.wamcstudios.moviesapp.core.common.CategoryTrending
 import com.wamcstudios.moviesapp.home.presentation.home.HomeEvent
 import com.wamcstudios.moviesapp.home.presentation.home.HomeState
+import com.wamcstudios.moviesapp.ui.theme.LocalSpacing
 import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalMaterial3Api::class)

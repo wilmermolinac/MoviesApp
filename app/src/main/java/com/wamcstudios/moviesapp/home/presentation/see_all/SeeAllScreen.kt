@@ -17,9 +17,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.wamcstudios.aifusion.core.desingsystem.theme.LocalSpacing
 import com.wamcstudios.calorytracker.navigation.utils.UiEvent
 import com.wamcstudios.moviesapp.home.presentation.see_all.components.SeeAllContent
+import com.wamcstudios.moviesapp.ui.theme.LocalSpacing
 import kotlinx.coroutines.flow.collectLatest
 
 @OptIn(ExperimentalMaterial3Api::class)

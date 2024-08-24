@@ -38,9 +38,9 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.wamcstudios.aifusion.core.desingsystem.theme.LocalSpacing
 import com.wamcstudios.moviesapp.R
 import com.wamcstudios.moviesapp.navigation.routes.NavigationRoute
+import com.wamcstudios.moviesapp.ui.theme.LocalSpacing
 
 @Composable
 fun MoviesBottomBar(modifier: Modifier = Modifier, navHostController: NavHostController) {

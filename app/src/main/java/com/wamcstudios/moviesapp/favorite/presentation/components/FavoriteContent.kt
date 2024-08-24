@@ -12,12 +12,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.wamcstudios.aifusion.core.desingsystem.theme.LocalSpacing
-import com.wamcstudios.aifusion.core.desingsystem.theme.WindowInfo
-import com.wamcstudios.aifusion.core.desingsystem.theme.rememberWindowInfo
 import com.wamcstudios.moviesapp.favorite.presentation.FavoriteEvent
 import com.wamcstudios.moviesapp.favorite.presentation.FavoriteState
 import com.wamcstudios.moviesapp.home.presentation.home.components.MediaItem
+import com.wamcstudios.moviesapp.ui.theme.LocalSpacing
+import com.wamcstudios.moviesapp.ui.theme.WindowInfo
+import com.wamcstudios.moviesapp.ui.theme.rememberWindowInfo
 
 @Composable
 fun FavoriteContent(

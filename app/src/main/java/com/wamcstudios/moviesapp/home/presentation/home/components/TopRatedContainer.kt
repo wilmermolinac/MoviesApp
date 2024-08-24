@@ -13,11 +13,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import com.wamcstudios.aifusion.core.desingsystem.theme.LocalSpacing
 import com.wamcstudios.moviesapp.R
 import com.wamcstudios.moviesapp.core.domain.model.Media
 import com.wamcstudios.moviesapp.core.ui.components.MediaItemShimmer
 import com.wamcstudios.moviesapp.core.ui.components.MoviesAndTvSeriesContainer
+import com.wamcstudios.moviesapp.ui.theme.LocalSpacing
 
 @Composable
 fun TopRatedContainer(

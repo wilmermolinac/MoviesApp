@@ -30,12 +30,12 @@ import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.size.Size
-import com.wamcstudios.aifusion.core.desingsystem.theme.LocalSpacing
 import com.wamcstudios.moviesapp.R
 import com.wamcstudios.moviesapp.core.common.Constants
 import com.wamcstudios.moviesapp.core.common.MediaType
 import com.wamcstudios.moviesapp.core.domain.model.Media
 import com.wamcstudios.moviesapp.core.ui.components.RatingItem
+import com.wamcstudios.moviesapp.ui.theme.LocalSpacing
 
 @Composable
 fun MediaItem(modifier: Modifier = Modifier, item: Media, onMediaClick: () -> Unit) {

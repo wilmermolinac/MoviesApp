@@ -22,7 +22,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import com.wamcstudios.aifusion.core.desingsystem.theme.LocalSpacing
+import com.wamcstudios.moviesapp.ui.theme.LocalSpacing
 
 @Composable
 fun UpcomingMovieItemShimmer(modifier: Modifier = Modifier) {

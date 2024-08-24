@@ -30,8 +30,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import com.wamcstudios.aifusion.core.desingsystem.theme.LocalSpacing
 import com.wamcstudios.moviesapp.R
+import com.wamcstudios.moviesapp.ui.theme.LocalSpacing
 
 @Composable
 fun SettingsContent(modifier: Modifier = Modifier) {

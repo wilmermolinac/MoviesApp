@@ -40,7 +40,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
-import com.wamcstudios.aifusion.core.desingsystem.theme.LocalSpacing
+import com.wamcstudios.moviesapp.ui.theme.LocalSpacing
 import kotlin.math.absoluteValue
 import kotlin.math.sign
 

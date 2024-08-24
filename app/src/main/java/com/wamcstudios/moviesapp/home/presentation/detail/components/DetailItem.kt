@@ -56,14 +56,14 @@ import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.size.Size
-import com.wamcstudios.aifusion.core.desingsystem.theme.LocalSpacing
-import com.wamcstudios.aifusion.core.desingsystem.theme.Soft
 import com.wamcstudios.moviesapp.R
 import com.wamcstudios.moviesapp.core.common.Constants
 import com.wamcstudios.moviesapp.core.common.MediaType
 import com.wamcstudios.moviesapp.core.domain.model.Media
 import com.wamcstudios.moviesapp.core.ui.components.RatingItem
 import com.wamcstudios.moviesapp.home.domain.model.ProductionCompany
+import com.wamcstudios.moviesapp.ui.theme.LocalSpacing
+import com.wamcstudios.moviesapp.ui.theme.Soft
 
 private const val TAG = "DetailItem"
 
@@ -78,10 +78,10 @@ fun DetailItem(
     val context = LocalContext.current
 
     val imageUrlBackdrop =
-        "${com.wamcstudios.moviesapp.core.common.Constants.IMAGE_BASE_URL}${mediaItem?.backdropPath}"
+        "${Constants.IMAGE_BASE_URL}${mediaItem?.backdropPath}"
     Log.d(TAG, "")
     val imageUrlPoster =
-        "${com.wamcstudios.moviesapp.core.common.Constants.IMAGE_BASE_URL}${mediaItem?.posterPath}"
+        "${Constants.IMAGE_BASE_URL}${mediaItem?.posterPath}"
 
     val imagePainterBackdrop = rememberAsyncImagePainter(
         model = ImageRequest.Builder(context).data(imageUrlBackdrop).size(Size.ORIGINAL).build()

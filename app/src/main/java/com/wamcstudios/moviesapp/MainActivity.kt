@@ -24,7 +24,7 @@ class MainActivity : ComponentActivity() {
 
             navHostController = rememberNavController()
 
-            MoviesAppTheme {
+            MoviesAppTheme() {
 
                 MoviesApp(
                     navHostController = navHostController,

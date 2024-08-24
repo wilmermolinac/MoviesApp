@@ -12,9 +12,9 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import com.wamcstudios.aifusion.core.desingsystem.theme.LocalSpacing
 import com.wamcstudios.moviesapp.home.presentation.detail.DetailEvent
 import com.wamcstudios.moviesapp.home.presentation.detail.DetailState
+import com.wamcstudios.moviesapp.ui.theme.LocalSpacing
 import kotlinx.coroutines.delay
 
 private const val TAG = "DetailContent"

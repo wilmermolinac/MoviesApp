@@ -1,4 +1,4 @@
-package com.wamcstudios.aifusion.core.desingsystem.theme
+package com.wamcstudios.moviesapp.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

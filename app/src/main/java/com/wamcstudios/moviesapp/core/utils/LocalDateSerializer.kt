@@ -8,7 +8,7 @@ package com.wamcstudios.moviesapp.core.utils
 
     override fun serialize(encoder: Encoder, value: LocalDate?) =
         encoder.encodeString(value.toString())
-
+1
     override fun deserialize(decoder: Decoder): LocalDate? = try {
         val string = decoder.decodeString()
         if (string.isNotEmpty()) {

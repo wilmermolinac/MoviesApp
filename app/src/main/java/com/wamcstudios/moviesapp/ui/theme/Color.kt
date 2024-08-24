@@ -1,5 +1,4 @@
-package com.wamcstudios.aifusion.core.desingsystem.theme
-
+package com.wamcstudios.moviesapp.ui.theme
 import androidx.compose.ui.graphics.Color
 
 val seed = Color(0xFF104392)

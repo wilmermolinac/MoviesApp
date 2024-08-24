@@ -1,4 +1,4 @@
-package com.wamcstudios.aifusion.core.desingsystem.theme
+package com.wamcstudios.moviesapp.ui.theme
 
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -24,6 +24,7 @@ data class Dimensions(
     val iconButtonSizeSmall: Dp = 0.dp,
     val iconButtonSizeMedium: Dp = 0.dp,
     val iconButtonSizeExtra: Dp = 0.dp,
+
     val upcomingMovieItemHeight: Dp = 0.dp,
     val horizontalFeedItemPosterHeight: Dp = 0.dp,
     val horizontalFeedItemPosterWidth: Dp = 0.dp,

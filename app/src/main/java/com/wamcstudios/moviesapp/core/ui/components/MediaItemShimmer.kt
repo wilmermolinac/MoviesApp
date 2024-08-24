@@ -18,7 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import com.wamcstudios.aifusion.core.desingsystem.theme.LocalSpacing
+import com.wamcstudios.moviesapp.ui.theme.LocalSpacing
 
 @Composable
 fun MediaItemShimmer(modifier: Modifier = Modifier, onMediaClick: () -> Unit) {

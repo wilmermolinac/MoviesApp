@@ -39,7 +39,6 @@ import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.size.Size
-import com.wamcstudios.aifusion.core.desingsystem.theme.LocalSpacing
 import com.wamcstudios.moviesapp.R
 import com.wamcstudios.moviesapp.core.common.Constants
 import com.wamcstudios.moviesapp.core.domain.model.Media
@@ -48,6 +47,7 @@ import com.wamcstudios.moviesapp.core.ui.components.MoviesAndTvSeriesContainer
 import com.wamcstudios.moviesapp.core.ui.components.UpcomingMovieItemShimmer
 import com.wamcstudios.moviesapp.core.ui.components.pagerTransition
 import com.wamcstudios.moviesapp.core.utils.toDateString
+import com.wamcstudios.moviesapp.ui.theme.LocalSpacing
 import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalFoundationApi::class)
